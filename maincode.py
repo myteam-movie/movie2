@@ -13,21 +13,6 @@ from nltk.stem.porter import PorterStemmer
 # -----------------------
 
 @st.cache_data
-import streamlit as st
-
-# Load custom CSS
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-local_css("style.css")
-
-# Example UI
-st.markdown("<div class='title'>🎬 Movie Recommender System</div>", unsafe_allow_html=True)
-movies = ["Inception", "Interstellar", "The Dark Knight"]
-for m in movies:
-    st.markdown(f"<div class='recommend-box'>{m}</div>", unsafe_allow_html=True)
-
 def load_data():
     # Load data (make sure the files are in the same folder or provide paths)
     movies = pd.read_csv('tmdb_5000_movies.csv')
