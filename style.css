@@ -1,0 +1,19 @@
+/* style.css */
+body {
+    background-color: #f4f6f9;
+}
+
+.title {
+    font-size: 40px;
+    color: #2E86C1;
+    text-align: center;
+    font-weight: bold;
+}
+
+.recommend-box {
+    padding: 15px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+}
