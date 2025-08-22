@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MovieFinder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white">
+  <div class="container mx-auto px-6 py-8">
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-4">
+        MovieFinder
+      </h1>
+      <p class="text-slate-300">Discover your next favorite movie with smart recommendations</p>
+      <div class="mt-6 max-w-2xl mx-auto flex">
+        <input id="search" type="text" placeholder="Search for any movie..." 
+          class="flex-1 px-4 py-3 rounded-l-2xl text-black focus:outline-none" />
+        <button onclick="doSearch()" class="px-5 py-3 bg-indigo-600 rounded-r-2xl">Search</button>
+      </div>
+    </div>
+    <div id="results" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+  </div>
+
+<script>
+const movies = [
+  {id:1,title:"Batman Begins",genres:["Action","Crime","Drama"],year:2005,rating:8.2,poster:"https://image.tmdb.org/t/p/w500/8RW2runSEc34IwKN2D1aPcJd3P3.jpg"},
+  {id:2,title:"The Dark Knight",genres:["Action","Crime","Drama"],year:2008,rating:9.0,poster:"https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"},
+  {id:3,title:"Inception",genres:["Action","Sci-Fi","Thriller"],year:2010,rating:8.8,poster:"https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg"},
+  {id:4,title:"Interstellar",genres:["Adventure","Drama","Sci-Fi"],year:2014,rating:8.6,poster:"https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"},
+  {id:5,title:"The Matrix",genres:["Action","Sci-Fi"],year:1999,rating:8.7,poster:"https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"},
+  {id:6,title:"Pulp Fiction",genres:["Crime","Drama"],year:1994,rating:8.9,poster:"https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg"},
+];
+
+function doSearch() {
+  const term = document.getElementById('search').value.toLowerCase();
+  const results = movies.filter(m => m.title.toLowerCase().includes(term));
+  renderResults(results);
+}
+
+function renderResults(list) {
+  const container = document.getElementById('results');
+  container.innerHTML = '';
+  if (list.length === 0) {
+    container.innerHTML = '<p class="text-slate-400">No movies found</p>';
+    return;
+  }
+  list.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'bg-slate-800/50 rounded-2xl overflow-hidden shadow hover:shadow-xl transition';
+    card.innerHTML = `
+      <img src="${m.poster}" alt="${m.title}" class="w-full h-64 object-cover" />
+      <div class="p-4">
+        <h3 class="text-xl font-bold mb-1">${m.title}</h3>
+        <p class="text-slate-300 mb-2">${m.year}</p>
+        <p class="text-yellow-400 font-semibold">⭐ ${m.rating}</p>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+// initial render
+renderResults(movies);
+</script>
+</body>
+</html>
